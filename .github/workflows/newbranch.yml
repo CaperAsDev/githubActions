@@ -5,8 +5,7 @@ on:
 
 jobs:
   deploy:
-    permissions:
-      actions: read
+    permissions: write-all
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
