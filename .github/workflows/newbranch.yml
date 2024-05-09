@@ -16,14 +16,20 @@ jobs:
         run: npm ci
       - name: build
         run: npm run build
+      - name: Debug Files
+        run: ls
+      - name: Deploy with gh-pages
+        run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npx gh-pages -d dist -b actions -u "github-actions-bot <support+actions@github.com>"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - uses: peterjgrainger/action-create-branch@v2.2.0
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   with:
       #     branch: 'first'
-      - uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: dist
-      - name: Debug Files
-        run: ls
+      # - uses: actions/upload-artifact@v4
+      #   with:
+      #     name: dist
+      #     path: dist
